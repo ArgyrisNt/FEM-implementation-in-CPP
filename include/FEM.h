@@ -1,6 +1,6 @@
 #pragma once
-#include "C:\Users\argir\source\repos\Matrix.h"
-#include "C:\Users\argir\source\repos\Mesh.h"
+#include "C:\Users\argir\FEM-implementation-in-CPP\include\Matrix.h"
+#include "C:\Users\argir\FEM-implementation-in-CPP\include\Mesh.h"
 
 class FEM
 {

@@ -1,7 +1,7 @@
 #include <iostream>
 #include <algorithm>
 #include <fstream>
-#include "C:\Users\argir\source\repos\Mesh.h"
+#include "C:\Users\argir\FEM-implementation-in-CPP\include\Mesh.h"
 
 Mesh::Mesh()
 {

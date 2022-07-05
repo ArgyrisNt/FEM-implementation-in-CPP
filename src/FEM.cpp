@@ -1,8 +1,8 @@
 #include <iostream>
 #include <cmath>
-#include "C:\Users\argir\source\repos\Matrix.h"
-#include "C:\Users\argir\source\repos\Mesh.h"
-#include "C:\Users\argir\source\repos\FEM.h"
+#include "C:\Users\argir\FEM-implementation-in-CPP\include\Matrix.h"
+#include "C:\Users\argir\FEM-implementation-in-CPP\include\Mesh.h"
+#include "C:\Users\argir\FEM-implementation-in-CPP\include\FEM.h"
 
 FEM::FEM() {}
 

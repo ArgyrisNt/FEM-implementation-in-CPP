@@ -2,7 +2,7 @@
 #include <cassert>
 #include <vector>
 #include <cmath>
-#include "C:\Users\argir\source\repos\Matrix.h"
+#include "C:\Users\argir\FEM-implementation-in-CPP\include\Matrix.h"
 
 Matrix::Matrix()
 {
