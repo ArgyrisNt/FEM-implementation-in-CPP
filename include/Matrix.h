@@ -26,7 +26,10 @@ public:
 	Matrix transpose();
 	Matrix inverse();
 	double norm(std::vector<double>& v);
-	std::vector<double> linsolve(std::vector<double> b, int iters);
+	std::vector<double> Jacobi_iterator(std::vector<double> b, int iters);
+	std::vector<Matrix> LU_factor();
+	std::vector<double> forward_Euler(std::vector<double> b);
+	std::vector<double> backward_Euler(std::vector<double> b);
 
 	// Destructor
 	~Matrix();

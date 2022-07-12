@@ -183,7 +183,7 @@ void FEM::expand_sol(std::vector<double>& init_sol)
 
 std::vector<double> FEM::solve(int iters = 10)
 {
-	solution = stiff.linsolve(rhs, iters);
+	solution = stiff.Jacobi_iterator(rhs, iters);
 	expand_sol(solution);
 
 	return solution;

@@ -212,7 +212,7 @@ double Matrix::norm(std::vector<double>& v)
 	return result;
 }
 
-std::vector<double> Matrix::linsolve(std::vector<double> b, int iters)
+std::vector<double> Matrix::Jacobi_iterator(std::vector<double> b, int iters)
 {
 	assert(rows == b.size());
 	assert(cols == b.size());
@@ -239,6 +239,91 @@ std::vector<double> Matrix::linsolve(std::vector<double> b, int iters)
 		for (size_t i = 0; i < n; i++)
 		{
 			x[i] = c[i] / mat[i][i];
+		}
+	}
+	return x;
+}
+
+std::vector<Matrix> Matrix::LU_factor() 
+{
+	assert(rows == cols);
+	std::cout << "\nSolving with LU decomposition method. . ." << "\n";
+	size_t n = rows;
+	Matrix L(n, n);
+	Matrix U(n, n);
+
+	// Doolittle algorithm
+	for (size_t i = 0; i < n; i++)
+	{
+		// matrix U
+		for (size_t k = i; k < n; k++)
+		{
+			double sum = 0.0;
+			for (size_t j = 0; j < i; j++)
+			{
+				sum += L(i, j) * U(j, k);
+			}
+			U.setValue(i, k, mat[i][k] - sum);
+		}
+
+		// matrix L
+		for (size_t k = i; k < n; k++)
+		{
+			if (i == k) L.setValue(i, i, 1);
+			else
+			{
+				double sum = 0.0;
+				for (size_t j = 0; j < i; j++)
+				{
+					sum += L(k, j) * U(j, i);
+				}
+				L.setValue(k, i, (mat[k][i] - sum) / U(i, i));
+			}
+		}
+	}
+	std::vector<Matrix> result(2, Matrix(n, n));
+	result[0] = L;
+	result[1] = U;
+
+	return result;
+}
+
+std::vector<double> Matrix::forward_Euler(std::vector<double> b) 
+{
+	size_t n = rows;
+	std::vector<double> y(n);
+	for (size_t j = 0; j < n; j++)
+	{
+		y[0] = b[0] / mat[0][0];
+		for (size_t i = 1; i < n; i++)
+		{
+			double sum = 0;
+			for (size_t k = 0; k <= i - 1; k++)
+			{
+				sum += mat[i][k] * y[k];
+			}
+			y[i] = (b[i] - sum) / mat[i][i];
+		}
+	}
+	return y;
+}
+
+std::vector<double> Matrix::backward_Euler(std::vector<double> b)
+{
+	int n = rows;
+	std::vector<double> x(n);
+
+	for (int j = 0; j < n; j++)
+	{
+		x[n - 1] = b[n - 1] / mat[n - 1][n - 1]; // OK
+		for (int i = n - 2; i >= 0; i--)
+		{
+			double sum = 0.0;
+			for (int k = i + 1; k < n; k++)
+			{
+				sum += mat[i][k] * x[k];
+			}
+			x[i] = (b[i] - sum) / mat[i][i];
 		}
 	}
 	return x;
